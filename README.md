@@ -1,0 +1,2 @@
+# bantuin-teman
+gak ada
