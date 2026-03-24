@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Pesan Rahasia</title>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial;
+    height: 100vh;
+    background: linear-gradient(#0a1a3a, #1e3c72);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+  }
+
+  .card {
+    text-align: center;
+    background: rgba(0,0,0,0.4);
+    padding: 25px;
+    border-radius: 20px;
+    width: 300px;
+  }
+
+  input {
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    width: 80%;
+    margin-top: 10px;
+  }
+
+  button {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  #yes {
+    background: #00c853;
+    color: white;
+  }
+
+  #no {
+    background: #d50000;
+    color: white;
+    position: absolute;
+  }
+
+  .btn-area {
+    position: relative;
+    height: 100px;
+  }
+
+  .popup {
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    color: black;
+    padding: 15px 30px;
+    border-radius: 10px;
+    display: none;
+    font-weight: bold;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="card" id="step1">
+  <h3>Masukin Nama Kamu (asli 😏)</h3>
+  <input type="text" id="nama" placeholder="Nama kamu">
+  <br>
+  <button onclick="lanjut()">Lanjut</button>
+</div>
+
+<div class="card" id="step2" style="display:none;">
+  <h3 id="teks"></h3>
+  <p>Mau balikan sama Dendi? 🥰</p>
+
+  <div class="btn-area">
+    <button id="yes" onclick="iya()">Mau</button>
+    <button id="no">Engga</button>
+  </div>
+</div>
+
+<div class="popup" id="popup">Harus mau!!! 🥺</div>
+
+<script>
+let namaUser = "";
+
+function lanjut() {
+  const input = document.getElementById("nama").value.trim();
+
+  if(input === "") {
+    alert("Isi nama dulu 😏");
+    return;
+  }
+
+  namaUser = input;
+
+  document.getElementById("step1").style.display = "none";
+  document.getElementById("step2").style.display = "block";
+
+  document.getElementById("teks").innerText =
+    "Kalau " + namaUser + " kangen...";
+}
+
+// pindahin event setelah step2 muncul
+setTimeout(() => {
+  const noBtn = document.getElementById("no");
+  const popup = document.getElementById("popup");
+
+  noBtn.addEventListener("mouseover", () => {
+    const x = Math.random() * 150;
+    const y = Math.random() * 60;
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+
+    popup.style.display = "block";
+    setTimeout(() => popup.style.display = "none", 800);
+  });
+}, 500);
+
+function iya() {
+  document.body.innerHTML = `
+    <h1 style="color:white;text-align:center;">
+    Selamat ${namaUser} sudah balikan sama Dendi ❤️<br>
+    Tanggal: 30 Maret 2026 ya
+    </h1>
+  `;
+}
+</script>
+
+</body>
+</html>
